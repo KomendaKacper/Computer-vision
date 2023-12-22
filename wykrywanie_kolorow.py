@@ -18,8 +18,9 @@ while True:
     result = cv2.bitwise_and(frame, frame, mask = mask) #Zaczernia wszystko co nie jest niebieskie
 
 
-    cv2.imshow('frame', result)    
+    cv2.imshow('result', result)    
     cv2.imshow('mask', mask)
+    cv2.imshow('frame', frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
