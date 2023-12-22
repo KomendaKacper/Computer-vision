@@ -30,3 +30,5 @@ cv2.destroyAllWindows
 BGR_color = np.array([[[255, 0, 0]]])
 x = cv2.cvtColor(BGR_color, cv2.COLOR_BGR2HSV)
 x[0][0] #Daje jeden pixel
+
+#yooooooooooooooooooooooooo
