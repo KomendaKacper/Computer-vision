@@ -46,9 +46,12 @@ class handDetector():
                     cv2.line(img, (thumb_x, thumb_y), (index_x, index_y), (0, 255, 0), 5)
                     cv2.circle(img, (thumb_x, thumb_y), 15, (255, 0, 255), cv2.FILLED)
                     cv2.circle(img, (index_x, index_y), 15, (255, 0, 255), cv2.FILLED)
+
                     dist = ((thumb_x - index_x)**2 + (thumb_y - index_y)**2)**0.5
-                    cv2.putText(img, "Odleglosc: " + str(int(dist)), (10, 90), cv2.FONT_HERSHEY_PLAIN, 3,
-                    (255, 0, 255), 3)
+                    if dist > 80:
+                        pyautogui.press("volumeup")
+                    else:
+                        pyautogui.press("volumedown")
         return lmList
 
 
@@ -61,19 +64,5 @@ def main():
         success, img = cap.read()
         img = detector.findHands(img)
         lmList = detector.findPosition(img)
-        if len(lmList) != 0:
-            print(lmList[8])
-
-        cTime = time.time()
-        fps = 1 / (cTime - pTime)
-        pTime = cTime
-
-        cv2.putText(img, "FPS: " + str(int(fps)), (10, 50), cv2.FONT_HERSHEY_PLAIN, 3,
-                    (255, 0, 255), 3)
-
-
-        cv2.imshow("Image", img)
-        if cv2.waitKey(1) == ord('q'): #kliknij q żeby wyjść
-            break
 if __name__ == "__main__":
     main()
