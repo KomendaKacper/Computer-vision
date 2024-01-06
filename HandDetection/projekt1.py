@@ -4,7 +4,8 @@ from cvzone.HandTrackingModule import HandDetector
 import time
 
 cap = cv2.VideoCapture(0)
-
+cap.set(3,1280)
+cap.set(4, 720)
 class DragRect():
     def __init__(self, posCenter, size):
         self.posCenter = posCenter
@@ -41,7 +42,9 @@ while True:
             x1, y1 = lmList1[8][0], lmList1[8][1]
             x2, y2 = lmList2[8][0], lmList2[8][1]
 
-            if ((lmList2[11][0]-lmList2[8][0])**2+(lmList2[11][1]-lmList2[8][1])**2)**0.5 < 30 and ((lmList1[11][0]-lmList1[8][0])**2+(lmList1[11][1]-lmList1[8][1])**2)**0.5 < 30:
+            print (int((lmList2[11][0]-lmList2[8][0])**2 +(lmList2[11][1]-lmList2[8][1])**2)**0.5)
+
+            if ((lmList2[11][0]-lmList2[8][0])**2+(lmList2[11][1]-lmList2[8][1])**2)**0.5 < 50 and ((lmList1[11][0]-lmList1[8][0])**2+(lmList1[11][1]-lmList1[8][1])**2)**0.5 < 50:
                 rectList.append(DragRect([x1, y1], [abs(x1-x2), abs(y1-y2)]))
                 time.sleep(0.3)
     
@@ -50,6 +53,8 @@ while True:
             cx, cy = rect.posCenter
             w, h = rect.size
             cv2.rectangle(img, (cx,cy), (cx+w,cy+h), (0,255,0), cv2.FILLED)
+    if ((lmList2[4][0]-lmList2[8][0])**2+(lmList2[4][1]-lmList2[8][1])**2)**0.5 < 50 or ((lmList1[4][0]-lmList1[8][0])**2+(lmList1[4][1]-lmList1[8][1])**2)**0.5 < 50:
+        break
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
