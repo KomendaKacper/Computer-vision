@@ -53,7 +53,7 @@ while True:
             cx, cy = rect.posCenter
             w, h = rect.size
             cv2.rectangle(img, (cx,cy), (cx+w,cy+h), (0,255,0), cv2.FILLED)
-    if ((lmList2[4][0]-lmList2[8][0])**2+(lmList2[4][1]-lmList2[8][1])**2)**0.5 < 50 or ((lmList1[4][0]-lmList1[8][0])**2+(lmList1[4][1]-lmList1[8][1])**2)**0.5 < 50:
+    if len(Allhands) == 2 and (((lmList2[4][0]-lmList2[8][0])**2+(lmList2[4][1]-lmList2[8][1])**2)**0.5 < 50 or ((lmList1[4][0]-lmList1[8][0])**2+(lmList1[4][1]-lmList1[8][1])**2)**0.5 < 50):
         break
 
     cv2.imshow("Image", img)
